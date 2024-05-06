@@ -11,10 +11,14 @@ const registerSchema = yup
       .string()
       .matches(/^[\w-.]+@(stud\.)?noroff.no$/, "Please enter a valid email")
       .required("Email is required"),
-    bannerUrl: yup.string().url("Banner URL must be a valid URL"),
-    bannerAlt: yup.string(),
-    avatarUrl: yup.string().url("Avatar URL must be a valid URL"),
-    avatarAlt: yup.string(),
+    banner: yup.object().shape({
+      alt: yup.string(),
+      url: yup.string().url("Banner URL must be a valid URL"),
+    }),
+    avatar: yup.object().shape({
+      alt: yup.string(),
+      url: yup.string().url("Avatar URL must be a valid URL"),
+    }),
     venueManager: yup.boolean().required("Venue Manager is required"),
     password: yup.string().min(8).required("Password is required"),
   })

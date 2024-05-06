@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerSchema from "../../../Validation/register";
+import { API_AUTH_REGISTER } from "../../../Shared/apis";
 
 function RegisterForm() {
   const {
@@ -12,7 +13,7 @@ function RegisterForm() {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await fetch("https://v2.api.noroff.dev/auth/register", {
+      const response = await fetch(API_AUTH_REGISTER, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,23 +45,23 @@ function RegisterForm() {
           <p>{errors.email?.message}</p>
         </div>
         <div>
-          <label htmlFor="bannerUrl">Banner URL</label>
-          <input {...register("bannerUrl")}></input>
-          <p>{errors.bannerUrl?.message}</p>
+          <label htmlFor="banner.url">Banner URL</label>
+          <input {...register("banner.url")}></input>
+          <p>{errors?.banner?.url?.message}</p>
         </div>
         <div>
-          <label htmlFor="bannerAlt">Banner Alt</label>
-          <input {...register("bannerAlt")}></input>
-          <p>{errors.bannerAlt?.message}</p>
+          <label htmlFor="banner.alt">Banner Alt</label>
+          <input {...register("banner.alt")}></input>
+          <p>{errors?.banner?.alt?.message}</p>
         </div>
         <div>
-          <label htmlFor="avatarUrl">Avatar Url</label>
-          <input {...register("avatarUrl")}></input>
-          <p>{errors.avatarUrl?.message}</p>
+          <label htmlFor="avatar.url">Avatar Url</label>
+          <input {...register("avatar.url")}></input>
+          <p>{errors?.avatar?.url?.message}</p>
         </div>
         <div>
           <label htmlFor="avatarAlt">Avatar Alt</label>
-          <input {...register("avatarAlt")}></input>
+          <input {...register("avatar.alt")}></input>
           <p>{errors.avatarAlt?.message}</p>
         </div>
         <div>
