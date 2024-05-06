@@ -1,9 +1,14 @@
-import { useFetchVenue } from "../../Hooks/useFetchVenue";
+import { useFetchSingle } from "../../Hooks/useFetchSingle";
+import { useParams } from "react-router-dom";
+import { API_HOLIDAZE_VENUES } from "../../Shared/apis";
 
 function Venue() {
-  const { venue, isLoading, isError } = useFetchVenue();
+  let { id } = useParams();
+  const { data, isLoading, isError } = useFetchSingle(
+    `${API_HOLIDAZE_VENUES}/${id}`
+  );
 
-  if (isLoading || !venue) {
+  if (isLoading || !data) {
     return <div>Loading...</div>;
   }
 
@@ -11,19 +16,19 @@ function Venue() {
     return <div>Something went wrong...</div>;
   }
 
-  console.log(venue);
+  console.log(data);
 
   return (
     <div>
-      <div key={venue.id}>
-        <div>id: {venue.name}</div>
+      <div key={data.id}>
+        <div>id: {data.name}</div>
         <img
           className="w-2/4"
-          src={venue.media[0].url}
-          alt={venue.media[0].alt}></img>
-        <div>Price ${venue.price}</div>
-        <div>Rating {venue.rating}</div>
-        <p>{venue.description}</p>
+          src={data.media[0].url}
+          alt={data.media[0].alt}></img>
+        <div>Price ${data.price}</div>
+        <div>Rating {data.rating}</div>
+        <p>{data.description}</p>
       </div>
     </div>
   );
