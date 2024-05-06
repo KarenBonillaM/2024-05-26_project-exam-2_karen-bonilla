@@ -32,8 +32,12 @@ function Venues() {
             key={venue.id}
             className="card-venue overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200">
             <img
-              src={venue.media[0].url}
-              alt={venue.media[0].alt}
+              src={
+                venue.media && venue.media.length > 0 ? venue.media[0].url : ""
+              }
+              alt={
+                venue.media && venue.media.length > 0 ? venue.media[0].alt : ""
+              }
               className="aspect-video w-full"
             />
             <div className="p-6">
