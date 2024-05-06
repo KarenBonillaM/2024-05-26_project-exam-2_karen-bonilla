@@ -2,10 +2,8 @@ import React from "react";
 import loginSchema from "../../../Validation/login";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const save = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
-};
+import * as storage from "../../../Shared/storage.js";
+import { API_AUTH_LOGIN } from "../../../Shared/apis.js";
 
 function LoginForm() {
   const {
@@ -16,7 +14,7 @@ function LoginForm() {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await fetch("https://v2.api.noroff.dev/auth/login", {
+      const response = await fetch(API_AUTH_LOGIN, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,11 +25,19 @@ function LoginForm() {
       if (response.ok) {
         const { accessToken, ...user } = await response.json();
 
-        save("token", accessToken);
-        save("profile", user);
+        storage.save("token", user.data.accessToken);
+        storage.save("profile", user.data);
 
-        const encodeName = encodeURIComponent(user.name);
+        console.log(user.data.accessToken);
+
+        console.log(user.data);
+
+        const encodeName = encodeURIComponent(user.data.name);
         console.log(`Welcome ${encodeName}`);
+
+        const redirectURL = `userprofile/${encodeName}`;
+
+        window.location.href = redirectURL;
       }
       console.log("User registered successfully");
     } catch (error) {
