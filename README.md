@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+https://medium.com/@ryaddev/building-a-responsive-carousel-in-react-using-tailwindcss-and-react-slick-838767755890
+
+https://wind-ui.com/
+
+https://tailwindcomponents.com/cheatsheet/
