@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { API_HOLIDAZE_VENUES } from "../../Shared/apis";
 
-export function useFetchVenue() {
+function useFetchVenue(url) {
   const [venue, setVenue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  let { id } = useParams();
+
+  console.log(url);
 
   useEffect(() => {
-    async function getData(url) {
-      try {
-        setIsLoading(true);
-        setIsError(false);
+    async function fetchData() {
+      setIsError(false);
+      setIsLoading(true);
 
+      try {
         const response = await fetch(url);
         const json = await response.json();
-
+        console.log(json);
         setVenue(json.data);
-      } catch (error) {
-        setIsError(true);
 
-        console.error("Error fetching data:", error);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+        setIsLoading(false);
+        setIsError(true);
       } finally {
         setIsLoading(false);
       }
     }
-    getData(`${API_HOLIDAZE_VENUES}/${id}`);
-  }, [id]);
-
+    fetchData();
+  }, [url]);
   return { venue, isLoading, isError };
 }
+
+export default useFetchVenue;
