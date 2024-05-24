@@ -3,8 +3,7 @@ import Venue from "../../Components/Venue";
 
 function VenuePage() {
   return (
-    <main className="body-page">
-      <h1>Venue Page</h1>
+    <main className="body-page p-8">
       <Venue />
     </main>
   );

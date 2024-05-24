@@ -3,9 +3,7 @@ import Venues from "../../Components/Venues";
 
 function HomePage() {
   return (
-    <main className="body-page m-6 p-8">
-      <h1>Welcome to Holidaze</h1>
-      <p>Find your perfect holiday destination</p>
+    <main className="body-page p-8">
       <Venues />
     </main>
   );
