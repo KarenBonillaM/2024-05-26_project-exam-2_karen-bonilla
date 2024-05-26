@@ -19,8 +19,15 @@ const venueSchema = yup.object({
   name: yup.string().required("Name is required"),
   description: yup.string().required("Description is required"),
   media: yup.array().of(mediaSchema),
-  price: yup.number().required("Price is required"),
-  maxGuests: yup.number().required("Max Guests is required"),
+  price: yup
+    .number()
+    .typeError("Price must be a number")
+    .required("Price is required")
+    .positive("Price must be a positive number"),
+  maxGuests: yup
+    .number()
+    .typeError("Max Guests must be a number")
+    .required("Max Guests is required"),
   rating: yup.number().default(0),
   meta: yup.object().shape({
     wifi: yup.boolean().default(false),

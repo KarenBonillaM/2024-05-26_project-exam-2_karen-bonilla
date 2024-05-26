@@ -83,47 +83,47 @@ function VenueEdit() {
         <div className="venue-info-container col-span-4 lg:col-span-12">
           <div>
             <h1 className="text-3xl py-4">{data.name}</h1>
-            <ul class="divide-y divide-slate-100 border-b-2 border-red">
-              <li class="flex items-start gap-4 px-4 py-3">
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <p class="text-base text-slate-700 ">
+            <ul className="divide-y divide-slate-100 border-b-2 border-red">
+              <li className="flex items-start gap-4 px-4 py-3">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
+                  <p className="text-base text-slate-700 ">
                     Price: {data.price} SEK
                   </p>
                 </div>
               </li>
-              <li class="flex items-start gap-4 px-4 py-3">
+              <li className="flex items-start gap-4 px-4 py-3">
                 <FontAwesomeIcon icon={faStar} />
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {data.rating}
                 </div>
               </li>
-              <li class="flex items-start gap-4 px-4 py-3">
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <div class="text-base text-slate-700">
+              <li className="flex items-start gap-4 px-4 py-3">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
+                  <div className="text-base text-slate-700">
                     Max guests: {data.maxGuests}
                   </div>
                 </div>
               </li>
-              <li class="flex items-start gap-4 px-4 py-3">
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <p class="text-base text-slate-700">{data.description}</p>
+              <li className="flex items-start gap-4 px-4 py-3">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
+                  <p className="text-base text-slate-700">{data.description}</p>
                 </div>
               </li>
-              <li class="flex items-start gap-4 px-4 py-3">
+              <li className="flex items-start gap-4 px-4 py-3">
                 <FontAwesomeIcon icon={faLocationDot} />
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {data.location.address}
                 </div>
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {data.location.city}
                 </div>
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {data.location.country}
                 </div>
               </li>
-              <li class="flex items-start gap-4 px-4 py-3">
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <div class="text-base text-slate-700">
+              <li className="flex items-start gap-4 px-4 py-3">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
+                  <div className="text-base text-slate-700">
                     Bookings: {data._count.bookings}
                   </div>
                 </div>

@@ -14,7 +14,10 @@ function VenueForm() {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({ resolver: yupResolver(venueSchema) });
+  } = useForm({
+    resolver: yupResolver(venueSchema),
+    defaultValues: { price: "", maxGuests: "" },
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,

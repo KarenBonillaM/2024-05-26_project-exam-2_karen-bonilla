@@ -5,6 +5,7 @@ const newBookingSchema = yup.object({
   dateTo: yup.string(),
   guests: yup
     .number()
+    .typeError("Guests must be a number")
     .required("Guests is required")
     .positive("Guests must be a positive number")
     .integer("Guests must be a whole number"),

@@ -26,7 +26,12 @@ function BookVenueForm() {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm({ resolver: yupResolver(newBookingSchema) });
+  } = useForm({
+    resolver: yupResolver(newBookingSchema),
+    defaultValues: {
+      guests: "",
+    },
+  });
 
   useEffect(() => {
     if (data && data.bookings) {
@@ -84,7 +89,6 @@ function BookVenueForm() {
         throw new Error("Failed to book venue");
       }
     } catch (error) {
-      console.error("Error booking venue", error.message);
       setAlertMessage({ type: "error", text: "Failed to book venue" });
     }
   };
@@ -100,15 +104,21 @@ function BookVenueForm() {
   };
 
   const isDateUnavailable = (date) => {
-    return unavailableDates.some((unavailableDate) => {
-      return (
+    return unavailableDates.some(
+      (unavailableDate) =>
         format(unavailableDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
-      );
-    });
+    );
   };
 
   const tileClassName = ({ date }) => {
     return isDateUnavailable(date) ? "bg-gray-400" : "";
+  };
+
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat("en-SE", {
+      style: "decimal",
+      currency: "SEK",
+    }).format(number);
   };
 
   useEffect(() => {
@@ -137,7 +147,9 @@ function BookVenueForm() {
         <div className="bg-gray-300 mt-6 p-2 inline-block">
           Unavailable dates
         </div>
-        <div className="mt-3 font-bold text-xl">Total: ${totalCost} SEK </div>
+        <div className="mt-3 font-bold text-xl">
+          Total: ${formatNumber(totalCost)} SEK{" "}
+        </div>
         <div className="relative my-6">
           <div className="pb-5">
             <input
@@ -152,7 +164,7 @@ function BookVenueForm() {
               htmlFor="guests">
               <span className="text-red-400">*</span> Guests:
             </label>
-            <p>{errors.guests?.message}</p>
+            <p className="text-red-500">{errors.guests?.message}</p>
           </div>
           <button
             className="flex uppercase h-12 w-full m-auto items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-800 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none"

@@ -13,7 +13,7 @@ TARGET AUDIENCE
 The platform is designed for travelers who value comfort and the feeling of being at home, even when they're far away. We cater to individuals who enjoy exploring new places without compromising on the coziness and convenience they cherish.
 
 Age Group
-Holidaze primarily focus on people aged 25 to 45. This demographic often seeks a balance between adventure and relaxation, looking for accommodations that offer both the excitement of travel and the comfort of home.
+Holidaze primarily focuses on people aged 25 to 45. This demographic often seeks a balance between adventure and relaxation, looking for accommodations that offer both the excitement of travel and the comfort of home.
 
 FEATURES
 
@@ -54,6 +54,12 @@ Installation
 - Explore the different features, create venues, and experience the accommodation experience.
 
 FUNCTIONALITIES
+
+Navigation Menu
+
+- Users can navigate to the sign-up page or the login page.
+
+- Once logged in, users can log out or access their profile page.
 
 Home Page
 
