@@ -1,76 +1,111 @@
-# Getting Started with Create React App
+# 2024-05-26_project-exam-2_Karen-Bonilla
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](./src/images/logo.png)
 
-## Available Scripts
+Holidaze
 
-In the project directory, you can run:
+OVERVIEW
 
-### `npm start`
+This project is an accommodation booking site built using React and Tailwind CSS. The site allows users to browse, book, and manage accommodations seamlessly. It includes features such as search functionality, user authentication, and a responsive design to ensure a great user experience across different devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+TARGET AUDIENCE
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The platform is designed for travelers who value comfort and the feeling of being at home, even when they're far away. We cater to individuals who enjoy exploring new places without compromising on the coziness and convenience they cherish.
 
-### `npm test`
+Age Group
+Holidaze primarily focus on people aged 25 to 45. This demographic often seeks a balance between adventure and relaxation, looking for accommodations that offer both the excitement of travel and the comfort of home.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+FEATURES
 
-### `npm run build`
+- User Authentication: Users can register, login, logout and access their personalized profiles.
+- Search and Filter: Search for accommodations based on various filters such as country, city, name and amenities.
+- Booking Management: Registered users can book accommodations and manage their bookings.
+- Admin facing side: Users registered as a manager can register and administer venues, view bookings, and update accommodation details.
+- Responsive Design: The application is designed to be responsive, ensuring a seamless experience across various devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+TECHNOLOGIES USED
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React 18.2.0: A JavaScript library for building user interfaces.
+- Tailwind CSS 3.4.3: A utility-first CSS framework for rapid UI development.
+- React Hook Form 7.51.3: For handling form inputs and validation.
+- React Router Dom 6.22.3: For routing and navigation within the application.
+- React Calendar 5: A versatile and customizable calendar component for React.
+- React Slick: A carousel component built with React, providing a sleek way to display sliding content.
+- Yup 1.4: A JavaScript schema builder for value parsing and validation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+GETTING STARTED
 
-### `npm run eject`
+Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js (v14.x or later)
+- npm (v6.x or later) or yarn (v1.x or later)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Clone the repository to your local machine:
+  git clone https://github.com/KarenBonillaM/2024-05-26_project-exam-2_karen-bonilla.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Install dependencies.
+  npm install
 
-## Learn More
+- Open your browser and visit:
+  (http://localhost:3000)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Explore the different features, create venues, and experience the accommodation experience.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+FUNCTIONALITIES
 
-### Code Splitting
+Home Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Venue listings: displays a list of available venues. Each venue card includes button that redirects to the venue details page, where registered users can book accommodations.
 
-### Analyzing the Bundle Size
+- Search Bar: Located at the top of the page, this feature allows users to search for venues by name, city or country.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Filter Options: Includes buttons for filtering venues based on specific amenities such as WiFi, breakfast, parking and pet-friendly options.
 
-### Making a Progressive Web App
+Venue Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Venue Details: This section showcases detailed information about the venue, including its location, price and available amenities. Users can explore all the essential details they need to know before making a booking decision.
 
-### Advanced Configuration
+- Booking Venue Form: Here, registered users can access a convenient calendar feature. This calendar displays unavailable dates, helping users plan their accommodation booking effectively. Additionally, users can input their desired dates and view the total price for their stay, providing a seamless booking experience.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Profile Page.
 
-### Deployment
+Register users can access their profile information conveniently on the Profile Page. This includes essential details such as their avatar image, user name, and a distinct label indicating their user role, whether they are a regular user or a manager. Additionally, users can easily navigate to the functionality to update their profile through a dedicated button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+-For User Managers: User managers have a comprehensive view of their managed venues. Each venue card on the page is equipped with a button that directs them to detailed venue information and a delete venue option for efficient management. Moreover, managers can effortlessly navigate to their bookings, ensuring they stay informed about upcoming reservations. Additional, managers have the flexibility to create new venues directly from this page, with a simple redirection to the venue creation form for added convenience.
 
-### `npm run build` fails to minify
+-For Regular Users: Regular users are presented with a clear overview of their upcoming bookings, providing them with quick access to their reservation details. Alongside, their profile card is prominently featured, ensuring users can easily identify their account information and manage their bookings effectively.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Edit Venue Page.
 
-https://medium.com/@ryaddev/building-a-responsive-carousel-in-react-using-tailwindcss-and-react-slick-838767755890
+On the Edit Venue Page, managers gain access to their own venue details and a comprehensive list of upcoming bookings associated with their venues, ensuring they remain well-informed and organized.
 
-https://wind-ui.com/
+By clicking the edit venue button, managers can seamlessly access a form to modify any information relative to the venue.
 
-https://tailwindcomponents.com/cheatsheet/
+-Login Page:
+
+The Login Page offers registered users the ability to log in using their Noroff email and password. Upon successful authentication, users are redirected to their personal profile page, providing them with quick access to their account information and functionalities.
+
+Usage
+
+- Begin by registering an account with a Noroff email and subsequently log in.
+- Create a comprehensive venue listing by providing detailed information and accompanying images.
+- Explore available venue listings effortlessly using the search bar or category filters.
+- Reserve a venue that piques your interest.
+- Access your personalized profile to conveniently monitor your venues and bookings.
+
+References
+
+- Images sourced from Unsplash.
+- https://wind-ui.com
+- https://tailwindcomponents.com/cheatsheet/
+- https://medium.com/@ryaddev/how-to-build-a-slider-header-in-react-using-tailwind-css-and-react-slick-3bff44a08271
+
+Contact
+
+This project was created by Karen Sofia Bonilla Moreno.
+karenbonillamoreno@gmail.com
+GitHub Profile: https://github.com/KarenBonillaM
+
+License
