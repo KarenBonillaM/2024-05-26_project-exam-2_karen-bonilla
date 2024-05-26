@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import editUserSchema from "../../../Validation/EditProfile";
 import { API_HOLIDAZE_PROFILES } from "../../../Shared/apis";
@@ -18,14 +18,8 @@ function EditUserForm() {
     register,
     handleSubmit,
     formState: { errors },
-    control,
     setValue,
   } = useForm({ resolver: yupResolver(editUserSchema) });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "media",
-  });
 
   const onSubmit = async (formData) => {
     try {

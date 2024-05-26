@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFetchSingle } from "../../Hooks/useFetchSingle";
 import {
   API_HOLIDAZE_PROFILES,

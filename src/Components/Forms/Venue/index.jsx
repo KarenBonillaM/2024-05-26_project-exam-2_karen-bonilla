@@ -7,8 +7,6 @@ import { load } from "../../../Shared/storage";
 
 function VenueForm() {
   const [newVenue, setNewVenue] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
 
   const {
@@ -25,9 +23,6 @@ function VenueForm() {
 
   const onSubmit = async (formData) => {
     try {
-      setIsLoading(true);
-      setIsError(false);
-
       const token = await load("token");
       if (!token) {
         console.log("token not found");
@@ -52,8 +47,6 @@ function VenueForm() {
         throw new Error("Failed to register venue");
       }
     } catch (error) {
-      setIsError(true);
-      setIsLoading(false);
       console.error("Error registering venue", error.message);
       setAlertMessage({ type: "error", text: "Failed to register venue" });
     }
