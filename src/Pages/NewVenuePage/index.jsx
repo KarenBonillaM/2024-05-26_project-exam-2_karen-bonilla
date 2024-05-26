@@ -3,7 +3,7 @@ import VenueForm from "../../Components/Forms/Venue";
 
 function NewVenuePage() {
   return (
-    <main className="body-page">
+    <main className="grow">
       <VenueForm />
     </main>
   );

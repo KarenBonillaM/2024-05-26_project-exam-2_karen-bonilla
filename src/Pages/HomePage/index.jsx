@@ -3,7 +3,7 @@ import Venues from "../../Components/Venues";
 
 function HomePage() {
   return (
-    <main className="body-page p-8">
+    <main className="grow p-8">
       <Venues />
     </main>
   );

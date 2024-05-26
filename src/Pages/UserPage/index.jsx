@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 
 function UserPage() {
   let { name } = useParams();
-  console.log("Name:", name);
 
   const { data, isLoading, isError } = useFetchSingle(
     `${API_HOLIDAZE_PROFILES}/${name}`
@@ -21,8 +20,6 @@ function UserPage() {
     return <div>Something went wrong...</div>;
   }
 
-  console.log("Profile:", data);
-
   if (!data) {
     return <div>No profile data available</div>;
   }
@@ -30,7 +27,7 @@ function UserPage() {
   const isManager = data && data.venueManager;
 
   return (
-    <main className="body-page p-8">
+    <main className="grow p-8">
       {isManager ? <ManagerProfile /> : <UserProfile />}
     </main>
   );
