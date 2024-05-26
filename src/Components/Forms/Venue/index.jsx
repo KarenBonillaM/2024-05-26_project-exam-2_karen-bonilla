@@ -29,7 +29,6 @@ function VenueForm() {
       setIsError(false);
 
       const token = await load("token");
-      console.log("Token:", token);
       if (!token) {
         console.log("token not found");
         return;
@@ -58,14 +57,13 @@ function VenueForm() {
       console.error("Error registering venue", error.message);
       setAlertMessage({ type: "error", text: "Failed to register venue" });
     }
-    console.log(formData);
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-center text-3xl">Create a new venue</h1>
+    <div className="p-4 my-8">
+      <h1 className="text-center text-3xl pb-3">Create a new venue</h1>
       <form
-        className="w-1/2 p-4 m-auto rounded bg-white shadow-md shadow-slate-200"
+        className="w-11/12 p-4 m-auto rounded bg-white shadow-md shadow-slate-200 lg:w-1/2 md:w-3/4"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="relative my-6">
           <input

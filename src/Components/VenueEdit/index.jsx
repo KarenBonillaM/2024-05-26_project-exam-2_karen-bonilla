@@ -25,11 +25,7 @@ function VenueEdit() {
     return <div>Something went wrong...</div>;
   }
 
-  console.log("VENUE DATA", data);
-
   const bookingsExist = data._count?.bookings > 0;
-
-  console.log("Bookings", bookingsExist);
 
   return (
     <div

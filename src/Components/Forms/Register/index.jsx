@@ -42,13 +42,12 @@ function RegisterForm() {
         setAlertMessage({ type: "error", text: "Failed to register user" });
       }
     }
-    console.log(formData);
   };
 
   return (
     <div className="p-4">
       <form
-        className="w-1/2 p-4 m-auto rounded bg-white shadow-md shadow-slate-200"
+        className="w-11/12 p-4 m-auto rounded bg-white shadow-md shadow-slate-200 lg:w-1/2 md:w-3/4"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="relative my-6">
           <input

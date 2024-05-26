@@ -14,9 +14,6 @@ function EditUserForm() {
   );
   const [alertMessage, setAlertMessage] = useState(null);
 
-  console.log(name);
-  console.log("Data:", data);
-
   const {
     register,
     handleSubmit,
@@ -33,7 +30,6 @@ function EditUserForm() {
   const onSubmit = async (formData) => {
     try {
       const token = await load("token");
-      console.log("Token:", token);
       if (!token) {
         console.log("token not found");
         return;
@@ -50,7 +46,6 @@ function EditUserForm() {
       });
 
       if (response.ok) {
-        console.log("User updated successfully!");
         setAlertMessage({ type: "success", text: "User updated successfully" });
       } else {
         throw new Error("Failed to update user");
@@ -58,8 +53,6 @@ function EditUserForm() {
     } catch (error) {
       console.error("Error updating user", error.message);
       setAlertMessage({ type: "error", text: "Failed to update user" });
-    } finally {
-      console.log(formData);
     }
   };
 

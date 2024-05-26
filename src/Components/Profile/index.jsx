@@ -6,11 +6,9 @@ import { API_HOLIDAZE_PROFILES } from "../../Shared/apis";
 
 function Profile() {
   let { name } = useParams();
-  console.log("Name:", name);
   const { data, isLoading, isError } = useFetchSingle(
     `${API_HOLIDAZE_PROFILES}/${name}`
   );
-  console.log("Profile:", data);
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -5,8 +5,6 @@ function useFetchVenue(url) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  console.log(url);
-
   useEffect(() => {
     async function fetchData() {
       setIsError(false);
@@ -15,7 +13,6 @@ function useFetchVenue(url) {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        console.log(json);
         setVenue(json.data);
 
         setIsLoading(false);

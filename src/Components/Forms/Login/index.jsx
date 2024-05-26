@@ -30,15 +30,11 @@ function LoginForm() {
         storage.save("token", user.data.accessToken);
         storage.save("profile", user.data);
 
-        console.log(user.data.accessToken);
-
         const encodeName = encodeURIComponent(user.data.name);
 
         setAlertMessage({ type: "success", text: "User registered" });
-        console.log("User registered successfully");
 
         const redirectURL = `user/${encodeName}`;
-        console.log(redirectURL);
         window.location.href = redirectURL;
       } else {
         const errorData = await response.json();
@@ -53,15 +49,14 @@ function LoginForm() {
       }
     } catch (error) {
       console.error("Error logging in user", error.message);
-      setAlertMessage({ type: "error", text: error.message });
+      setAlertMessage({ type: "error", text: "An unexpected error occurred" });
     }
-    console.log(formData);
   };
 
   return (
     <div className="p-4">
       <form
-        className="w-1/2 p-4 m-auto rounded bg-white shadow-md shadow-slate-200"
+        className="w-11/12 p-4 m-auto rounded bg-white shadow-md shadow-slate-200 lg:w-1/2 md:w-3/4"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="relative my-6">
           <input

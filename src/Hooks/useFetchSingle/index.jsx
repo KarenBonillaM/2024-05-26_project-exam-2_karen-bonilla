@@ -14,7 +14,6 @@ export function useFetchSingle(url) {
         setIsError(false);
 
         const token = await load("token");
-        console.log("Token:", token);
         if (!token) {
           setIsError("token not found");
           return;
@@ -29,8 +28,6 @@ export function useFetchSingle(url) {
           },
         });
         const json = await response.json();
-
-        console.log(json);
 
         setData(json.data);
       } catch (error) {
