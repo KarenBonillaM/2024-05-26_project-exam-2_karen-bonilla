@@ -11,7 +11,6 @@ function Nav() {
   const [isNavListOpen, setIsNavListOpen] = useState(false);
 
   const handleLogOut = () => {
-    console.log("Logging out...");
     localStorage.removeItem("token");
     localStorage.removeItem("profile");
     window.location.href = "/login";
@@ -35,7 +34,6 @@ function Nav() {
   }
 
   return (
-    // <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
     <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
       <nav className="text-black text-xl flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700">
         <NavLink
@@ -58,23 +56,23 @@ function Nav() {
               }`}>
               {user ? (
                 <>
-                  <li className="flex items-stretch border-b hover:bg-gray-200">
+                  <li className="pl-3 flex items-stretch border-b hover:bg-gray-200">
                     <NavLink
                       to="/"
-                      className="py-4 transition-colors duration-300 hover:text-blue-800 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
+                      className="flex justify-start w-full py-4 transition-colors duration-300 hover:text-blue-800 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
                       Venues
                     </NavLink>
                   </li>
-                  <li className="flex items-stretch border-b hover:bg-gray-200">
+                  <li className="pl-3 flex items-stretch border-b hover:bg-gray-200">
                     <NavLink
                       to={`/user/${user.name}`}
-                      className="py-4 transition-colors duration-300 hover:text-blue-800 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
+                      className="flex justify-start w-full py-4 transition-colors duration-300 hover:text-blue-800 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
                       Profile
                     </NavLink>
                   </li>
-                  <li className="flex items-stretch border-b hover:bg-gray-200">
+                  <li className="pl-3 flex items-stretch border-b hover:bg-gray-200">
                     <div
-                      className="py-4 transition-colors duration-300 hover:text-blue-500 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link"
+                      className="flex justify-start w-full py-4 transition-colors duration-300 hover:text-blue-500 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link"
                       onClick={handleLogOut}>
                       Logout
                     </div>
@@ -82,16 +80,16 @@ function Nav() {
                 </>
               ) : (
                 <>
-                  <li className="flex items-stretch border-b hover:bg-gray-200">
+                  <li className="pl-3 flex items-stretch border-b hover:bg-gray-200">
                     <NavLink
                       to="/signup"
-                      className="py-4 transition-colors duration-300 hover:text-blue-500 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
+                      className="flex justify-start w-full py-4 transition-colors duration-300 hover:text-blue-500 focus:text-blue-800 focus:outline-none focus-visible:outline-none lg:px-8 nav-link">
                       Sign up
                     </NavLink>
                   </li>
-                  <li className="flex items-stretch hover:bg-gray-200">
+                  <li className="pl-3 flex items-stretch hover:bg-gray-200">
                     <NavLink
-                      className="py-4 nav-link transition-colors duration-300 hover:text-blue-800 focus:text-blue-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                      className="flex justify-start w-full py-4 nav-link transition-colors duration-300 hover:text-blue-800 focus:text-blue-600 focus:outline-none focus-visible:outline-none lg:px-8"
                       to="/login">
                       Login
                     </NavLink>
