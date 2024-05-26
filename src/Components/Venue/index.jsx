@@ -31,8 +31,6 @@ function Venue() {
     return <div>Something went wrong...</div>;
   }
 
-  console.log(venue);
-
   const SliderArrow = ({ className, style, onClick, position }) => {
     const arrowStyle =
       position === "next"
@@ -89,12 +87,12 @@ function Venue() {
           )}
         </div>
       </section>
-      <section className="section-venue-booking grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12 pt-8 sm:grid">
+      <section className="overflow-hidden section-venue-booking grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12 pt-8 sm:grid">
         <div className="venue-info-container col-span-4 lg:col-span-7">
           <div>
             <h1 className="text-3xl py-4">{venue.name}</h1>
             <ul className="divide-y divide-slate-100 border-b-2 border-red">
-              <li class="flex items-start gap-4 px-4 py-3">
+              <li className="flex items-start gap-4 px-4 py-3">
                 <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
                   <p className="text-base text-slate-700 ">
                     Price: {venue.price} SEK
@@ -103,25 +101,27 @@ function Venue() {
               </li>
               <li className="flex items-start gap-4 px-4 py-3">
                 <FontAwesomeIcon icon={faStar} />
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {venue.rating}
                 </div>
               </li>
               <li className="flex items-start gap-4 px-4 py-3">
                 <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <div class="text-base text-slate-700">
+                  <div className="text-base text-slate-700">
                     Max guests: {venue.maxGuests}
                   </div>
                 </div>
               </li>
               <li className="flex items-start gap-4 px-4 py-3">
                 <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center">
-                  <p class="text-base text-slate-700">{venue.description}</p>
+                  <p className="text-base text-slate-700">
+                    {venue.description}
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-4 px-4 py-3">
                 <FontAwesomeIcon icon={faLocationDot} />
-                <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
+                <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
                   {venue.location.address}
                 </div>
                 <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
