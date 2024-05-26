@@ -1,21 +1,26 @@
+import React, { useState } from "react";
 import { useFetchSingle } from "../../Hooks/useFetchSingle";
 import { useParams } from "react-router-dom";
 import { API_HOLIDAZE_VENUES } from "../../Shared/apis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWifi } from "@fortawesome/free-solid-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
-import { faUtensils } from "@fortawesome/free-solid-svg-icons";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faWifi,
+  faCar,
+  faUtensils,
+  faPaw,
+  faStar,
+  faCheck,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 import House from "../../images/house.jpg";
+import { load } from "../../Shared/storage";
 
 function VenueEdit() {
   let { id } = useParams();
   const { data, isLoading, isError } = useFetchSingle(
     `${API_HOLIDAZE_VENUES}/${id}?_bookings=true`
   );
+  const [alertMessage, setAlertMessage] = useState(null);
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -26,6 +31,37 @@ function VenueEdit() {
   }
 
   const bookingsExist = data._count?.bookings > 0;
+
+  async function onButtonClick(id) {
+    const token = await load("token");
+
+    try {
+      const response = await fetch(`${API_HOLIDAZE_VENUES}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": "25333fa4-e617-4cfb-a41d-9fd9a59c9f28",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setAlertMessage({ type: "success", text: "Venue was deleted" });
+      } else {
+        throw new Error("Failed to delete venue");
+      }
+    } catch (error) {
+      console.error("Error deleting venue", error.message);
+      setAlertMessage({ type: "error", text: "Failed to delete venue" });
+    }
+  }
+
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const options = { day: "2-digit", month: "short", year: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  };
 
   return (
     <div
@@ -103,8 +139,8 @@ function VenueEdit() {
                     className="divide-y divide-slate-100 border-b-2 border-red">
                     <li className="flex items-start gap-4 px-4 py-3">
                       <div className="flex flex-col gap-0 min-h-[2rem] items-start justify-center text-base text-slate-700">
-                        <p>Booking Date from: {booking.dateFrom}</p>
-                        <p>Booking Date to: {booking.dateTo}</p>
+                        <p>Booking date from: {formatDate(booking.dateFrom)}</p>
+                        <p>Booking date to: {formatDate(booking.dateTo)}</p>
                         <p>Guests: {booking.guests}</p>
                         <p>Guest name: {booking.customer.name}</p>
                         <p>Guest email: {booking.customer.email}</p>
@@ -224,7 +260,23 @@ function VenueEdit() {
             </ul>
           </div>
         </div>
+        <button
+          onClick={() => onButtonClick(data.id)}
+          className="inline-flex h-8 w-fit items-center justify-center gap-2 whitespace-nowrap rounded bg-red-400 px-2 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-red-600 focus:bg-red-800 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
+          Delete Venue
+        </button>
       </section>
+      {alertMessage && (
+        <div
+          className={`alert mt-4 w-full px-4 py-3 text-sm border rounded border-emerald-100 bg-emerald-50 text-emerald-500 ${
+            alertMessage.type === "success"
+              ? "bg-emerald-100 text-emerald-500"
+              : "bg-red-50 text-red-500"
+          }
+        `}>
+          {alertMessage.text}
+        </div>
+      )}
     </div>
   );
 }

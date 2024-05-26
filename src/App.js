@@ -14,7 +14,6 @@ import AboutUsPage from "./Pages/AboutUsPage";
 
 function App() {
   return (
-    <div className="main-container">
       <Routes>
         <Route path="/" element={<Layout />}> 
           <Route path="/" element={<HomePage />} />
@@ -29,8 +28,6 @@ function App() {
           <Route path="editVenue/:id" element={< EditVenuePage />} />
        </Route>
       </Routes>
-    </div>
-    
   );
 }
 
