@@ -8,7 +8,7 @@ function SearchBar({ onSearch }) {
 
   return (
     <form onKeyUp={handleSubmit} className="search-bar flex justify-center">
-      <div className="flex justify-between h-14 w-1/2 p-2 border border-gray-300 shadow-md rounded-md shadow-slate-200">
+      <div className="flex justify-between h-14 w-4/5 p-2 border border-gray-300 shadow-md rounded-md shadow-slate-200 lg:w-1/2">
         <input
           className="w-full p-2 rounded-l-md border-none focus:outline-none"
           type="text"
