@@ -9,6 +9,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useFetchSingle } from "../../../Hooks/useFetchSingle";
 import { API_HOLIDAZE_VENUES } from "../../../Shared/apis";
+import { format, addDays, parseISO } from "date-fns";
 
 function BookVenueForm() {
   let { id } = useParams();
@@ -20,8 +21,6 @@ function BookVenueForm() {
   const [totalCost, setTotalCost] = useState(0);
   const [alertMessage, setAlertMessage] = useState(null);
 
-  console.log("ID", id);
-
   const {
     register,
     handleSubmit,
@@ -32,13 +31,13 @@ function BookVenueForm() {
   useEffect(() => {
     if (data && data.bookings) {
       const bookedDates = data.bookings.reduce((acc, booking) => {
-        const dateFrom = new Date(booking.dateFrom);
-        const dateTo = new Date(booking.dateTo);
+        const dateFrom = parseISO(booking.dateFrom);
+        const dateTo = parseISO(booking.dateTo);
         let currentDate = dateFrom;
 
         while (currentDate <= dateTo) {
           acc.push(new Date(currentDate));
-          currentDate.setDate(currentDate.getDate() + 1);
+          currentDate = addDays(currentDate, 1);
         }
         return acc;
       }, []);
@@ -49,18 +48,15 @@ function BookVenueForm() {
   useEffect(() => {
     if (data && data.price && selectedDates.length === 2) {
       const [start, end] = selectedDates;
-      const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+      const days = Math.ceil((end, start) / (1000 * 60 * 60 * 24)) + 1;
       setTotalCost(days * data.price);
     }
   }, [selectedDates, data]);
 
   const onSubmit = async (formData) => {
     try {
-      console.log("Form data:", formData);
       const token = await load("token");
-      console.log("Token:", token);
       if (!token) {
-        console.log("token not found");
         setAlertMessage({ type: "error", text: "User not registered" });
         return;
       }
@@ -72,8 +68,6 @@ function BookVenueForm() {
         venueId: id,
       };
 
-      console.log("Booking data:", bookingData);
-
       const response = await fetch(API_HOLIDAZE_BOOKINGS, {
         method: "POST",
         headers: {
@@ -84,10 +78,7 @@ function BookVenueForm() {
         body: JSON.stringify(bookingData),
       });
 
-      console.log("Response:", response);
-
       if (response.ok) {
-        console.log("Booking successful");
         setAlertMessage({ type: "success", text: "Booking successful" });
       } else {
         throw new Error("Failed to book venue");
@@ -99,14 +90,10 @@ function BookVenueForm() {
   };
 
   const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return format(date, "yyyy-MM-dd");
   };
 
   const handleDateChange = (dates) => {
-    console.log("Dates:", dates);
     if (Array.isArray(dates) && dates.length === 2) {
       setSelectedDates(dates);
     }
@@ -114,11 +101,8 @@ function BookVenueForm() {
 
   const isDateUnavailable = (date) => {
     return unavailableDates.some((unavailableDate) => {
-      const d = new Date(unavailableDate);
       return (
-        date.getFullYear() === d.getFullYear() &&
-        date.getMonth() === d.getMonth() &&
-        date.getDate() === d.getDate()
+        format(unavailableDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
       );
     });
   };
@@ -129,7 +113,6 @@ function BookVenueForm() {
 
   useEffect(() => {
     if (data) {
-      console.log("Data:", data);
       setValue("venueId", data.id);
     }
   }, [data, setValue]);
@@ -142,7 +125,6 @@ function BookVenueForm() {
         <Calendar
           onChange={handleDateChange}
           formatLongDate={(locale, date) => formatDate(date)}
-          onClickDay={(value) => console.log(value)}
           value={selectedDates}
           selectRange={true}
           tileClassName={tileClassName}
