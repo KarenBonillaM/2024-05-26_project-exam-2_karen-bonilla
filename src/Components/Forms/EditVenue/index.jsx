@@ -6,6 +6,8 @@ import { API_HOLIDAZE_VENUES } from "../../../Shared/apis";
 import { load } from "../../../Shared/storage";
 import { useParams } from "react-router-dom";
 import { useFetchSingle } from "../../../Hooks/useFetchSingle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 function EditVenueForm() {
   let { id } = useParams();
@@ -13,9 +15,6 @@ function EditVenueForm() {
     `${API_HOLIDAZE_VENUES}/${id}`
   );
   const [alertMessage, setAlertMessage] = useState(null);
-
-  console.log(id);
-  console.log("Data:", data);
 
   const {
     register,
@@ -33,7 +32,6 @@ function EditVenueForm() {
   const onSubmit = async (formData) => {
     try {
       const token = await load("token");
-      console.log("Token:", token);
       if (!token) {
         console.log("token not found");
         return;
@@ -57,13 +55,9 @@ function EditVenueForm() {
           text: "Venue updated successfully",
         });
       }
-
-      console.log("Venue updated successfully!");
     } catch (error) {
       console.error("Error updating venue", error.message);
       setAlertMessage({ type: "error", text: "Failed to update venue" });
-    } finally {
-      console.log(formData);
     }
   };
 
@@ -94,11 +88,23 @@ function EditVenueForm() {
     return <div>Something went wrong...</div>;
   }
 
+  const handleEditFormClose = () => {
+    const form = document.querySelector(".update-venue-form");
+    form.classList.add("hidden");
+  };
+
   return (
     <form
-      className="p-5 rounded bg-white shadow-md shadow-slate-200 m-6"
+      className="mb-3 p-6 rounded bg-white shadow-md shadow-slate-200 lg:m-6 relative"
       onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="text-xl text-center">Edit your venue</h1>
+      <button type="button" onClick={handleEditFormClose}>
+        <FontAwesomeIcon
+          className="pr-4 absolute right-1 text-xl top-5 font-extrabold cursor-pointer hover:text-blue-500"
+          icon={faX}
+        />
+      </button>
+
+      <h1 className="text-xl text-center pt-6">Edit your venue</h1>
       <div className="relative my-6">
         <input
           className="peer relative h-12 w-full rounded border border-slate-200 px-4 text- text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-blue-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
