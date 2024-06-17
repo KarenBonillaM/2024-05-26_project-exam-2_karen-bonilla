@@ -4,6 +4,7 @@ import useFetch from "../../Hooks/useFetchArray";
 import { API_HOLIDAZE_VENUES } from "../../Shared/apis";
 import SearchBar from "../SearchBar";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import House from "../../images/house.jpg";
@@ -16,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Venues() {
-  const { venues } = useFetch(`${API_HOLIDAZE_VENUES}`);
+  const { venues, isLoading, isError } = useFetch(`${API_HOLIDAZE_VENUES}`);
   const [searchResults, setSearchResults] = useState([]);
   const [isWifiFiltered, setIsWifiFiltered] = useState(false);
   const [isBreakfastFiltered, setIsBreakfastFiltered] = useState(false);
@@ -104,6 +105,9 @@ function Venues() {
     nextArrow: <SliderArrow position="next" />,
     prevArrow: <SliderArrow position="prev" />,
   };
+
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error fetching data</div>;
 
   return (
     <div>
