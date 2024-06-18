@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import useFetch from "../../Hooks/useFetchArray";
 import { API_HOLIDAZE_VENUES } from "../../Shared/apis";
 import SearchBar from "../SearchBar";
 import { Link } from "react-router-dom";
-import Loading from "../Loading";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import House from "../../images/house.jpg";
@@ -15,9 +14,11 @@ import {
   faPaw,
   faCar,
 } from "@fortawesome/free-solid-svg-icons";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function Venues() {
-  const { venues, isLoading, isError } = useFetch(`${API_HOLIDAZE_VENUES}`);
+  const { venues } = useFetch(`${API_HOLIDAZE_VENUES}`);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isWifiFiltered, setIsWifiFiltered] = useState(false);
   const [isBreakfastFiltered, setIsBreakfastFiltered] = useState(false);
@@ -106,8 +107,12 @@ function Venues() {
     prevArrow: <SliderArrow position="prev" />,
   };
 
-  if (isLoading) return <Loading />;
-  if (isError) return <div>Error fetching data</div>;
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, [venues]);
 
   return (
     <div>
@@ -160,60 +165,72 @@ function Venues() {
       <h2 className="p-5 font-medium text-2xl">
         Book your perfect place in your favorite destination
       </h2>
-      <section className="venues-container grid grid-cols-4 gap-6 p-4 md:grid-cols-8 lg:grid-cols-12">
-        {venuesToDisplay.map((venue) => (
-          <div
-            key={venue.id}
-            className="relative card-venue overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 col-span-4 lg:col-span-3">
-            {venue.media && venue.media.length > 1 ? (
-              <Slider {...sliderSettings}>
-                {venue.media.map((image, index) => (
-                  <div key={index}>
-                    <img
-                      src={image.url}
-                      alt={image.alt || "venue image"}
-                      className="aspect-video w-full h-52"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            ) : (
-              <img
-                src={
-                  venue.media && venue.media.length === 1
-                    ? venue.media[0].url
-                    : House
-                }
-                alt={
-                  venue.media && venue.media.length === 1
-                    ? venue.media[0].alt
-                    : "house"
-                }
-                className="aspect-video w-full h-52"
-              />
-            )}
-            <div className="p-6">
-              <div className="mb-4">
-                <h2 className="text-xl font-medium text-slate-700">
-                  {venue.name}
-                </h2>
-                <p className="text-slate-400">
-                  Price: {venue.price} kr SEK night
-                </p>
-                <div>{venue.location.city}</div>
-                <div>{venue.location.country}</div>
+
+      {isLoading ? (
+        <div className="w-full flex m-auto py-24">
+          <BeatLoader
+            color={"#3B82F6"}
+            loading={isLoading}
+            size={15}
+            className="m-auto"
+          />
+        </div>
+      ) : (
+        <section className="venues-container grid grid-cols-4 gap-6 p-4 md:grid-cols-8 lg:grid-cols-12">
+          {venuesToDisplay.map((venue) => (
+            <div
+              key={venue.id}
+              className="relative card-venue overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 col-span-4 lg:col-span-3">
+              {venue.media && venue.media.length > 1 ? (
+                <Slider {...sliderSettings}>
+                  {venue.media.map((image, index) => (
+                    <div key={index}>
+                      <img
+                        src={image.url}
+                        alt={image.alt || "venue image"}
+                        className="aspect-video w-full h-52"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              ) : (
+                <img
+                  src={
+                    venue.media && venue.media.length === 1
+                      ? venue.media[0].url
+                      : House
+                  }
+                  alt={
+                    venue.media && venue.media.length === 1
+                      ? venue.media[0].alt
+                      : "house"
+                  }
+                  className="aspect-video w-full h-52"
+                />
+              )}
+              <div className="p-6">
+                <div className="mb-4">
+                  <h2 className="text-xl font-medium text-slate-700">
+                    {venue.name}
+                  </h2>
+                  <p className="text-slate-400">
+                    Price: {venue.price} kr SEK night
+                  </p>
+                  <div>{venue.location.city}</div>
+                  <div>{venue.location.country}</div>
+                </div>
+              </div>
+              <div className="flex justify-end p-6 pt-0">
+                <Link to={`/venue/${venue.id}`}>
+                  <button className="absolute bottom-4 right-4 w-30 inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-800 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
+                    <span>Book now!</span>
+                  </button>
+                </Link>
               </div>
             </div>
-            <div className="flex justify-end p-6 pt-0">
-              <Link to={`/venue/${venue.id}`}>
-                <button className="absolute bottom-4 right-4 w-30 inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-800 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
-                  <span>Book now!</span>
-                </button>
-              </Link>
-            </div>
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
+      )}
     </div>
   );
 }

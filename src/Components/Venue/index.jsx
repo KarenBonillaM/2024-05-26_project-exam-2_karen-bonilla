@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import useFetchVenue from "../../Hooks/useFetchVenue";
 import Slider from "react-slick";
 import { useParams } from "react-router-dom";
@@ -16,20 +17,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import House from "../../images/house.jpg";
 import BookVenueForm from "../../Components/Forms/BookVenue";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function Venue() {
   let { id } = useParams();
-  const { venue, isLoading, isError } = useFetchVenue(
-    `${API_HOLIDAZE_VENUES}/${id}`
-  );
-
-  if (isLoading || !venue) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Something went wrong...</div>;
-  }
+  const { venue } = useFetchVenue(`${API_HOLIDAZE_VENUES}/${id}`);
+  const [isLoading, setIsLoading] = useState(false);
 
   const SliderArrow = ({ className, style, onClick, position }) => {
     const arrowStyle =
@@ -49,6 +42,26 @@ function Venue() {
     nextArrow: <SliderArrow position="next" />,
     prevArrow: <SliderArrow position="prev" />,
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, [venue]);
+
+  if (!venue) {
+    return (
+      <div className="w-full flex m-auto py-24">
+        <BeatLoader
+          color={"#3B82F6"}
+          loading={true}
+          size={15}
+          className="m-auto"
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -80,10 +93,10 @@ function Venue() {
                   : "house"
               }
               className="
-              h-96
-              w-full
-              object-fill
-              rounded-lg"></img>
+                    h-96  
+                    w-full
+                    object-fill
+                    rounded-lg"></img>
           )}
         </div>
       </section>
@@ -139,7 +152,6 @@ function Venue() {
                 </div>
               </li>
             </ul>
-
             <ul className="divide-y divide-slate-100 pt-8">
               <h2 className="text-xl pb-3">Amenities</h2>
               <li className="flex items-center gap-4 px-4 py-3">
@@ -194,7 +206,6 @@ function Venue() {
                   </div>
                 </div>
               </li>
-
               <li className="flex items-center gap-4 px-4 py-3">
                 <div className="flex items-center self-center text-blue-500">
                   <FontAwesomeIcon className="h-6 w-6" icon={faUtensils} />
