@@ -13,6 +13,6 @@
     "declarationMap": true,
     "sourceMap": true
   },
-  "include": ["./ts/**/*.ts"],
+  "include": ["./ts/**/*.ts", "./tsx/**/*.tsx"],
   "exclude": ["node_modules/"]
 }

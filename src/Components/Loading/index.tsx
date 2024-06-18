@@ -1,6 +1,6 @@
 import React, { useEffect, CSSProperties } from "react";
 
-const override = CSSProperties {
+const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
