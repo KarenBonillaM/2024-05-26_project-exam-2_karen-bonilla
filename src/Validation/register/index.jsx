@@ -17,6 +17,10 @@ const registerSchema = yup
     }),
     venueManager: yup.boolean().required("Venue Manager is required"),
     password: yup.string().min(8).required("Password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
   })
   .required();
 
