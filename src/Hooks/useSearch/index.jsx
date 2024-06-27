@@ -9,7 +9,7 @@ function useSearch({ onSearch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(query);
+    onSearch(query.trim());
   };
 
   return {

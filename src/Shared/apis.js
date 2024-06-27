@@ -6,4 +6,5 @@ export const API_HOLIDAZE = `${API_BASE_URL}/holidaze`;
 export const API_HOLIDAZE_VENUES = `${API_HOLIDAZE}/venues`;
 export const API_HOLIDAZE_PROFILES = `${API_HOLIDAZE}/profiles`;
 export const API_HOLIDAZE_BOOKINGS = `${API_HOLIDAZE}/bookings`;
+export const API_HOLIDAZE_VENUES_SEARCH = `${API_HOLIDAZE_VENUES}/search`;
 
