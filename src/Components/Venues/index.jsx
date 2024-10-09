@@ -18,6 +18,7 @@ import {
   faCar,
 } from "@fortawesome/free-solid-svg-icons";
 import BeatLoader from "react-spinners/BeatLoader";
+import Pagination from "../Pagination";
 
 function Venues() {
   const { venues } = useFetch(`${API_HOLIDAZE_VENUES}`);
@@ -29,6 +30,24 @@ function Venues() {
     isPetFriendlyFiltered: false,
     isParkingFiltered: false,
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const venuesPerPage = 10;
+  const totalVenues =
+    searchResults.length > 0 ? searchResults.length : venues.length;
+  const totalPages = Math.ceil(totalVenues / venuesPerPage);
+
+  //Slice venues based on the current page
+
+  const getPaginatedVenues = (venuesToDisplay) => {
+    const startIndex = (currentPage - 1) * venuesPerPage;
+    const endIndex = startIndex + venuesPerPage;
+    return venuesToDisplay.slice(startIndex, endIndex);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleSearch = async (query) => {
     try {
@@ -49,6 +68,7 @@ function Venues() {
         setSearchResults(venuesSearched);
       }
       setIsLoading(false);
+      setCurrentPage(1);
     } catch (error) {
       setIsLoading(false);
     }
@@ -77,6 +97,8 @@ function Venues() {
     searchResults.length > 0
       ? applyFilters(searchResults)
       : applyFilters(venues);
+
+  const paginatedVenues = getPaginatedVenues(venuesToDisplay);
 
   const SliderArrow = ({ className, style, onClick, position }) => {
     const arrowStyle =
@@ -205,12 +227,12 @@ function Venues() {
         </div>
       ) : (
         <section className="venues-container grid grid-cols-4 gap-6 p-4 md:grid-cols-8 lg:grid-cols-12">
-          {venuesToDisplay.length === 0 ? (
+          {paginatedVenues.length === 0 ? (
             <div className="w-full flex m-auto py-24">
               <p className="text-2xl">No venues found</p>
             </div>
           ) : (
-            venuesToDisplay.map((venue) => (
+            paginatedVenues.map((venue) => (
               <div
                 key={venue.id}
                 className="relative card-venue overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 col-span-4 lg:col-span-3">
@@ -275,6 +297,11 @@ function Venues() {
           )}
         </section>
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
